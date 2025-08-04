@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
     // Đây là địa chỉ của JSON Server
-    private apiUrl = 'http://localhost:3000/profile';
+    apiUrl = 'https://my-json-server.typicode.com/pyke1501/nesa-web-app/profile';
 
     constructor(private http: HttpClient) { }
 
