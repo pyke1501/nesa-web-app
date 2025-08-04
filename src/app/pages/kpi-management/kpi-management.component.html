@@ -1,0 +1,273 @@
+<div class="kpi-management-container">
+  <h1 class="page-title">Quản lý KPI</h1>
+  <p class="page-subtitle">Hệ thống quản lý chỉ số đánh giá hiệu suất theo tiêu chuẩn doanh nghiệp</p>
+
+  <nav class="kpi-tabs">
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'dashboard'" (click)="selectTab('dashboard')">Dashboard</a>
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'my-kpi'" (click)="selectTab('my-kpi')">KPI của tôi</a>
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'measurement'" (click)="selectTab('measurement')">Đo lường</a>
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'improvement-plan'" (click)="selectTab('improvement-plan')">Kế hoạch cải tiến</a>
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'all-kpi'" (click)="selectTab('all-kpi')">Tất cả KPI</a>
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'framework'" (click)="selectTab('framework')">Khung KPI</a>
+    <a href="javascript:void(0)" class="kpi-tab-item" [class.active]="activeTab === 'evaluation'" (click)="selectTab('evaluation')">Đánh giá</a>
+  </nav>
+
+  <div *ngIf="activeTab === 'dashboard'">
+    <div class="kpi-summary-grid">
+      <div class="card kpi-summary-card">
+        <div class="card-header">
+          <span>Tổng KPI</span>
+          <div class="icon-wrapper blue"><i data-feather="target"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="value">1</div>
+          <div class="description">1 đang hoạt động</div>
+        </div>
+      </div>
+      <div class="card kpi-summary-card">
+        <div class="card-header">
+          <span>Tiến độ trung bình</span>
+          <div class="icon-wrapper red"><i data-feather="trending-up"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="value">0.0%</div>
+          <div class="progress-bar">
+            <div class="progress" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card kpi-summary-card">
+        <div class="card-header">
+          <span>KPI hoàn thành</span>
+          <div class="icon-wrapper green"><i data-feather="check-circle"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="value">0</div>
+          <div class="description">Đạt hoặc vượt mục tiêu</div>
+        </div>
+      </div>
+      <div class="card kpi-summary-card">
+        <div class="card-header">
+          <span>Cần chú ý</span>
+          <div class="icon-wrapper orange"><i data-feather="alert-triangle"></i></div>
+        </div>
+        <div class="card-body">
+          <div class="value">0</div>
+          <div class="description">Dưới 80% mục tiêu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-detail-grid">
+      <div class="card kpi-detail-card">
+        <h3 class="card-title">Hiệu suất KPI</h3>
+        <p class="card-subtitle">Phân loại theo mức độ đạt mục tiêu</p>
+        <ul class="kpi-list">
+          <li><span class="dot excellent"></span> Xuất sắc (≥100%) <span>0</span></li>
+          <li><span class="dot good"></span> Tốt (80-99%) <span>0</span></li>
+          <li><span class="dot improvement"></span> Cần cải thiện (<80%) <span>0</span></li>
+        </ul>
+      </div>
+      <div class="card kpi-detail-card">
+        <h3 class="card-title">Kế hoạch cải tiến</h3>
+        <p class="card-subtitle">Trạng thái các kế hoạch hành động</p>
+        <ul class="kpi-list">
+          <li><span class="dot pending"></span> Chờ thực hiện <span>0</span></li>
+          <li><span class="dot in-progress"></span> Đang thực hiện <span>0</span></li>
+          <li><span class="dot overdue"></span> Quá hạn <span>0</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card featured-kpi-card">
+      <h3 class="card-title">KPI nổi bật</h3>
+      <p class="card-subtitle">Top 5 KPI có hiệu suất cao nhất</p>
+      <div class="kpi-placeholder">
+        <div class="placeholder-icon"></div>
+        <p>Chưa có dữ liệu KPI để hiển thị</p>
+        <small>Hãy tạo KPI và nhập dữ liệu đo lường</small>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'my-kpi'">
+    <div class="card kpi-table-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">KPI của tôi</h2>
+          <p class="section-description">Quản lý và theo dõi các KPI được giao cho bạn</p>
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo KPI mới</button>
+      </div>
+      <div class="filter-bar">
+        <div class="search-box">
+          <i data-feather="search"></i><input type="text" placeholder="Tìm kiếm KPI...">
+        </div>
+        <select class="filter-select"><option>Tất cả danh mục</option></select>
+        <select class="filter-select"><option>Tất cả trạng thái</option></select>
+      </div>
+      <div class="employee-table-wrapper">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Tên KPI</th><th>Danh mục</th><th>Mục tiêu</th><th>Tiến độ</th><th>Trạng thái</th><th>Cập nhật</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let kpi of kpiList">
+              <td>
+                <div class="kpi-name">{{ kpi.name }}</div>
+                <div class="kpi-description">{{ kpi.description }}</div>
+              </td>
+              <td>{{ kpi.category }}</td><td>{{ kpi.progress }}</td><td>{{ kpi.progress }}</td>
+              <td><span class="tag-status active">{{ kpi.status }}</span></td>
+              <td>{{ kpi.updated }}</td>
+              <td><button class="btn-icon"><i data-feather="edit-2"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'measurement'">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Theo dõi đo lường KPI</h2>
+        <p class="section-description">Nhập và theo dõi các lần đo lường KPI</p>
+      </div>
+      <button class="btn btn-primary" disabled><i data-feather="plus"></i> Thêm đo lường</button>
+    </div>
+    <div class="card measurement-card">
+      <h3 class="card-title"><i data-feather="activity"></i> Chọn KPI</h3>
+      <select class="filter-select full-width"><option>Chọn KPI để theo dõi đo lường</option></select>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'improvement-plan'">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Quản lý kế hoạch cải tiến</h2>
+          <p class="section-description">Tạo và theo dõi các kế hoạch cải tiến KPI</p>
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo kế hoạch</button>
+      </div>
+      <div class="card view-mode-card">
+        <h3 class="card-title"><i data-feather="eye"></i> Chế độ xem</h3>
+        <div class="sub-tabs">
+            <button class="sub-tab-item active"><i data-feather="user"></i> Kế hoạch của tôi</button>
+            <button class="sub-tab-item"><i data-feather="target"></i> Theo KPI cụ thể</button>
+        </div>
+      </div>
+      <div class="card kpi-placeholder large">
+          <div class="placeholder-icon"></div>
+          <p>Chưa có kế hoạch cải tiến nào</p>
+          <small>Nhấn "Tạo kế hoạch" để bắt đầu</small>
+      </div>
+  </div>
+
+  <div *ngIf="activeTab === 'all-kpi'">
+    <div class="card kpi-table-card">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Tất cả KPI</h2>
+            <p class="section-description">Tổng quan tất cả KPI trong hệ thống</p>
+          </div>
+          <button class="btn btn-primary"><i data-feather="plus"></i> Tạo KPI mới</button>
+        </div>
+        <div class="filter-bar">
+          <div class="search-box">
+            <i data-feather="search"></i><input type="text" placeholder="Tìm kiếm KPI...">
+          </div>
+          <select class="filter-select"><option>Tất cả danh mục</option></select>
+          <select class="filter-select"><option>Tất cả trạng thái</option></select>
+        </div>
+        <div class="employee-table-wrapper">
+          <table class="employee-table">
+            <thead>
+              <tr>
+                <th>Tên KPI</th><th>Danh mục</th><th>Mục tiêu</th><th>Tiến độ</th><th>Trạng thái</th><th>Cập nhật</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let kpi of kpiList">
+                <td>
+                  <div class="kpi-name">{{ kpi.name }}</div>
+                  <div class="kpi-description">{{ kpi.description }}</div>
+                </td>
+                <td>{{ kpi.category }}</td><td>{{ kpi.progress }}</td><td>{{ kpi.progress }}</td>
+                <td><span class="tag-status active">{{ kpi.status }}</span></td>
+                <td>{{ kpi.updated }}</td>
+                <td><button class="btn-icon"><i data-feather="edit-2"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+
+  <div *ngIf="activeTab === 'framework'">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Quản lý khung KPI</h2>
+        <p class="section-description">Thiết lập khung KPI theo cấp độ tổ chức</p>
+      </div>
+      <button class="btn btn-primary"><i data-feather="plus"></i> Tạo khung KPI</button>
+    </div>
+
+    <div class="card filter-card">
+      <h3 class="card-title"><i data-feather="filter"></i> Bộ lọc và tìm kiếm</h3>
+      <div class="framework-filters">
+        <div class="search-box">
+          <i data-feather="search"></i><input type="text" placeholder="Tìm kiếm Khung KPI...">
+        </div>
+        <select class="filter-select"><option>Loại khung</option></select>
+        <select class="filter-select"><option>Cấp độ mục tiêu</option></select>
+        <select class="filter-select"><option>Phòng ban</option></select>
+        <button class="btn btn-secondary">Xóa bộ lọc</button>
+      </div>
+    </div>
+
+    <div class="framework-list">
+      <p class="list-summary">Hiển thị 6 trong số 6 khung KPI</p>
+      <div class="card framework-item" *ngFor="let framework of kpiFrameworks">
+        <div class="framework-info">
+          <h3 class="framework-name">
+            <i data-feather="archive"></i>
+            {{ framework.name }}
+            <span class="tag-framework">{{ framework.tag }}</span>
+          </h3>
+          <p class="framework-description">{{ framework.description }}</p>
+          <div class="framework-meta">
+            <div>
+              <span>Cấp độ mục tiêu</span>
+              <strong>{{ framework.level }}</strong>
+            </div>
+            <div>
+              <span>Phòng ban</span>
+              <strong>{{ framework.department }}</strong>
+            </div>
+            <div>
+              <span>Trạng thái</span>
+              <strong class="tag-status active">{{ framework.status }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'evaluation'">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Quản lý đánh giá KPI</h2>
+        <p class="section-description">Đánh giá định kỳ hiệu suất KPI</p>
+      </div>
+      <button class="btn btn-primary" disabled><i data-feather="plus"></i> Tạo đánh giá</button>
+    </div>
+    <div class="card measurement-card">
+      <h3 class="card-title"><i data-feather="file-text"></i> Chọn KPI để đánh giá</h3>
+      <select class="filter-select full-width"><option>Chọn KPI để thực hiện đánh giá</option></select>
+    </div>
+  </div>
+</div>

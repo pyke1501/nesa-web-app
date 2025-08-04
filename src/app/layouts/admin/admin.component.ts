@@ -1,19 +1,17 @@
-// src/app/app.component.ts
-import { Component, AfterViewInit, AfterViewChecked, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-// Đảm bảo bạn đã import feather-icons
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as feather from 'feather-icons';
-
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AdminComponent implements AfterViewInit, DoCheck {
+
   title = 'nesa-dashboard';
 
   // Biến để lưu trạng thái đóng/mở của sidebar
   public isSidebarCollapsed = false;
+  private lastSidebarState = this.isSidebarCollapsed;
 
   @ViewChild('toggleIcon', { static: false }) toggleIcon!: ElementRef;
 
@@ -50,5 +48,14 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     feather.replace();
+  }
+
+  // ngDoCheck sẽ chạy thường xuyên, nhưng chúng ta sẽ kiểm tra điều kiện bên trong
+  ngDoCheck() {
+    // Chỉ chạy feather.replace() KHI trạng thái của sidebar thực sự thay đổi
+    if (this.isSidebarCollapsed !== this.lastSidebarState) {
+      feather.replace();
+      this.lastSidebarState = this.isSidebarCollapsed; // Cập nhật lại trạng thái cũ
+    }
   }
 }

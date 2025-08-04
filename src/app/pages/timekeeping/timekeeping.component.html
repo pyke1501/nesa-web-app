@@ -1,0 +1,507 @@
+<div class="timekeeping-container">
+  <h1 class="page-title">Quản lý chấm công</h1>
+  <p class="page-subtitle">Thiết lập và quản lý hệ thống chấm công</p>
+
+  <nav class="tabs">
+    <a href="javascript:void(0)" (click)="selectTab('schedule')" class="tab-item" [class.active]="activeTab === 'schedule'">Lịch làm việc</a>
+    <a href="javascript:void(0)" (click)="selectTab('leave')" class="tab-item" [class.active]="activeTab === 'leave'">Lịch nghỉ</a>
+    <a href="javascript:void(0)" (click)="selectTab('settings')" class="tab-item" [class.active]="activeTab === 'settings'">Cài đặt máy chấm công</a>
+    <a href="javascript:void(0)" (click)="selectTab('reports')" class="tab-item" [class.active]="activeTab === 'reports'">Báo cáo</a>
+    <a href="javascript:void(0)" (click)="selectTab('checkinout')" class="tab-item" [class.active]="activeTab === 'checkinout'">Check-in/out</a>
+  </nav>
+
+  <div class="tab-content-wrapper">
+    <!-- ==========SCHEDULE========== -->
+    <div class="tab-content" [class.active]="activeTab === 'schedule'">
+      <section class="card section-card">
+        <div class="section-header">
+          <h2 class="section-title">Thiết kế lịch làm việc</h2>
+          <div class="section-actions">
+            <button class="btn btn-secondary" (click)="openAssignShiftModal()">
+              <i data-feather="users"></i> Phân công ca
+            </button>
+            <button class="btn btn-primary" (click)="openCreateShiftModal()">
+              <i data-feather="plus"></i> Tạo ca làm việc
+            </button>
+          </div>
+        </div>
+        <p class="section-description">Quản lý các ca làm việc và phân công nhân viên.</p>
+        <div class="summary-grid">
+          <div class="summary-card total">
+            <div class="card-value">3</div>
+            <div class="card-label">Tổng số ca</div>
+          </div>
+          <div class="summary-card full-time">
+            <div class="card-value">1</div>
+            <div class="card-label">Full-time</div>
+          </div>
+          <div class="summary-card part-time">
+            <div class="card-value">1</div>
+            <div class="card-label">Part-time</div>
+          </div>
+          <div class="summary-card flex-time">
+            <div class="card-value">1</div>
+            <div class="card-label">Linh hoạt</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-list">
+        <h2 class="section-title">Danh sách ca làm việc</h2>
+        <div class="card shift-item">
+          <div class="shift-details">
+            <h3>Ca bán thời gian <span class="tag part-time">Part-time</span></h3>
+            <div class="shift-meta">
+              <span><i data-feather="clock"></i> 08:00:00 - 12:00:00</span>
+              <span><i data-feather="calendar"></i> T2, T3, T4, T5, T6</span>
+              <span><i data-feather="users"></i> Hệ số: 1</span>
+            </div>
+          </div>
+          <div class="shift-actions">
+            <button class="btn-icon"><i data-feather="edit-2"></i></button>
+            <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+          </div>
+        </div>
+        <div class="card shift-item">
+          <div class="shift-details">
+            <h3>Ca linh hoạt <span class="tag flex-time">Linh hoạt</span></h3>
+            <p class="shift-description">Giờ làm việc linh hoạt 8h - 10h/ngày</p>
+            <div class="shift-meta">
+              <span><i data-feather="clock"></i> 09:00:00 - 17:00:00</span>
+              <span><i data-feather="calendar"></i> T2, T3, T4, T5, T6</span>
+              <span><i data-feather="users"></i> Hệ số: 1</span>
+            </div>
+          </div>
+          <div class="shift-actions">
+            <button class="btn-icon"><i data-feather="edit-2"></i></button>
+            <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+          </div>
+        </div>
+        <div class="card shift-item">
+          <div class="shift-details">
+            <h3>Ca hành chính <span class="tag full-time">Full-time</span></h3>
+            <p class="shift-description">Ca sáng: 08:00 - 12:00, Ca chiều: 13:00 - 17:00</p>
+            <div class="shift-meta">
+              <span><i data-feather="clock"></i> 08:00:00 - 17:00:00</span>
+              <span><i data-feather="calendar"></i> Thứ 7: Nửa ngày sáng</span>
+            </div>
+          </div>
+          <div class="shift-actions">
+            <button class="btn-icon"><i data-feather="edit-2"></i></button>
+            <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- ==========END SCHEDULE========== -->
+
+    <!-- ==========LEAVE========== -->
+    <div class="tab-content" [class.active]="activeTab === 'leave'">
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">Quản lý loại nghỉ phép</h2>
+          <button class="btn btn-primary"><i data-feather="plus"></i> Tạo loại nghỉ mới</button>
+        </div>
+        <p class="section-description">Thiết lập các loại nghỉ phép và quy định</p>
+        <div class="leave-types-grid">
+          <div class="card leave-type-card">
+            <div class="leave-card-header">
+              <div class="leave-icon orange"><i data-feather="thermometer"></i></div>
+              <div class="leave-actions">
+                <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+              </div>
+            </div>
+            <h3 class="leave-title">Nghỉ ốm</h3>
+            <p class="leave-description">Nghỉ ốm có lương</p>
+            <ul class="leave-details">
+              <li><span>Có lương:</span> <span class="tag-detail blue">Có</span></li>
+              <li><span>Tối đa/năm:</span> <span class="tag-detail">30 ngày</span></li>
+              <li><span>Cần phê duyệt:</span> <span class="tag-detail">Có</span></li>
+            </ul>
+          </div>
+          <div class="card leave-type-card">
+            <div class="leave-card-header">
+              <div class="leave-icon red"><i data-feather="calendar"></i></div>
+              <div class="leave-actions">
+                <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+              </div>
+            </div>
+            <h3 class="leave-title">Nghỉ không lương</h3>
+            <p class="leave-description">Nghỉ không được trả lương</p>
+            <ul class="leave-details">
+              <li><span>Có lương:</span> <span class="tag-detail">Không</span></li>
+              <li><span>Tối đa/năm:</span> <span class="tag-detail">365 ngày</span></li>
+              <li><span>Cần phê duyệt:</span> <span class="tag-detail">Có</span></li>
+            </ul>
+          </div>
+          </div>
+      </section>
+    </div>
+    <!-- ==========END LEAVE========== -->
+
+    <!-- ==========SETTINGS========== -->
+    <div class="tab-content" [class.active]="activeTab === 'settings'">
+      <div class="settings-grid">
+        <div class="card">
+          <h3 class="form-title">Thêm địa điểm mới</h3>
+          <form class="settings-form">
+            <div class="input-group">
+              <label for="locationName">Tên địa điểm *</label>
+              <input id="locationName" type="text" placeholder="Văn phòng chính, Chi nhánh...">
+            </div>
+            <div class="input-group">
+              <label for="address">Địa chỉ</label>
+              <input id="address" type="text" placeholder="Địa chỉ chi tiết (tự động điền khi chọn trên bản đồ)" disabled>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label for="latitude">Vĩ độ (Latitude) *</label>
+                <input id="latitude" type="text" value="21.028511">
+              </div>
+              <div class="input-group">
+                <label for="longitude">Kinh độ (Longitude) *</label>
+                <input id="longitude" type="text" value="105.804817">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="radius">Bán kính chấm công (mét)</label>
+              <input id="radius" type="number" value="100">
+              <small>Khoảng cách tối đa để có thể chấm công (10-1000m)</small>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary"><i data-feather="map-pin"></i> Lấy vị trí hiện tại</button>
+              <button type="button" class="btn btn-secondary"><i data-feather="map"></i> Mở Google Maps</button>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">Thêm địa điểm</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 class="form-title">Chọn vị trí trên bản đồ</h3>
+          <p class="section-description">Nhập API key hợp lệ để sử dụng bản đồ.</p>
+          <div class="map-placeholder">
+            <i data-feather="map-pin"></i>
+            <p>Vui lòng nhập Google Maps API Key hợp lệ</p>
+          </div>
+          <div class="input-group">
+            <input type="text" placeholder="API key phải có format: AIza...">
+          </div>
+        </div>
+      </div>
+
+      <div class="card location-list-card">
+        <h3 class="form-title">Danh sách địa điểm chấm công</h3>
+        <div class="location-item">
+          <div class="location-info">
+            <h4>42BT8 Văn Quán <span class="location-radius">100m</span></h4>
+            <p>42BT8 Văn Quán</p>
+            <small>Lat: 20.977707 Long: 105.792901</small>
+          </div>
+          <div class="location-actions">
+            <button class="btn-icon"><i data-feather="globe"></i></button>
+            <button class="btn-icon"><i data-feather="edit-2"></i></button>
+            <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+          </div>
+        </div>
+        </div>
+    </div>
+    <!-- ==========END SETTINGS========== -->
+
+    <!-- ==========REPORTS========== -->
+    <div class="tab-content" [class.active]="activeTab === 'reports'">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Báo cáo chấm công</h2>
+          <p class="section-description">Xem và tạo báo cáo chi tiết về chấm công</p>
+        </div>
+        <button class="btn btn-primary"><i data-feather="file-plus"></i> Tạo báo cáo</button>
+      </div>
+
+      <div class="report-summary-grid">
+        <div class="card report-card total">
+          <div class="report-card-icon"><i data-feather="users"></i></div>
+          <div class="report-card-info">
+            <div class="report-card-value">45</div>
+            <div class="report-card-label">Tổng nhân viên</div>
+          </div>
+        </div>
+        <div class="card report-card present">
+          <div class="report-card-icon"><i data-feather="user-check"></i></div>
+          <div class="report-card-info">
+            <div class="report-card-value">42</div>
+            <div class="report-card-label">Có mặt hôm nay</div>
+          </div>
+        </div>
+        <div class="card report-card late">
+          <div class="report-card-icon"><i data-feather="clock"></i></div>
+          <div class="report-card-info">
+            <div class="report-card-value">3</div>
+            <div class="report-card-label">Đi muộn hôm nay</div>
+          </div>
+        </div>
+        <div class="card report-card absent">
+          <div class="report-card-icon"><i data-feather="user-x"></i></div>
+          <div class="report-card-info">
+            <div class="report-card-value">3</div>
+            <div class="report-card-label">Vắng mặt hôm nay</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card report-history-card">
+        <h2 class="section-title">Lịch sử báo cáo</h2>
+        <div class="report-history-placeholder">
+          <i data-feather="file-text"></i>
+          <p>Chưa có báo cáo nào</p>
+        </div>
+      </div>
+    </div>
+    <!-- ==========END REPORTS========== -->
+
+    <!-- ==========CHECKIN/OUT========== -->
+    <div class="tab-content" [class.active]="activeTab === 'checkinout'">
+      <div class="checkin-grid">
+        <div class="card checkin-action-card">
+          <h3 class="card-title">Chấm công</h3>
+          <div class="checkin-status-row">
+            <span>Trạng thái:</span>
+            <span class="tag-status" [class.checked-in]="(timekeepingService.isCheckedIn$ | async)">
+              {{ (timekeepingService.isCheckedIn$ | async) ? 'Đang làm việc' : 'Chưa check-in' }}
+            </span>
+          </div>
+          </div>
+
+          <div class="card checkin-summary-card">
+            <h3 class="card-title">Tóm tắt hôm nay</h3>
+            <div class="summary-details">
+              <div>
+                <div class="summary-label">Check-in</div>
+                <div class="summary-value">{{ (timekeepingService.checkInTime$ | async) | date:'HH:mm:ss' }}</div>
+              </div>
+              <div>
+                <div class="summary-label">Check-out</div>
+                <div class="summary-value">{{ (timekeepingService.checkOutTime$ | async) | date:'HH:mm:ss' }}</div>
+              </div>
+              <div>
+                <div class="summary-label">Giờ làm việc</div>
+                <div class="summary-value">{{ timekeepingService.workDuration$ | async }}</div>
+              </div>
+              <div>
+                <div class="summary-label">Trạng thái</div>
+                <div class="summary-value">
+                  <span class="tag-status" [ngClass]="{
+                    'checked-in': (timekeepingService.isCheckedIn$ | async),
+                    'checked-out': !(timekeepingService.isCheckedIn$ | async) && (timekeepingService.checkInTime$ | async)
+                  }">
+                    {{ (timekeepingService.isCheckedIn$ | async) ? 'Đang làm việc' :
+                       ((timekeepingService.checkInTime$ | async) ? 'Đã check-out' : 'Chưa check-in') }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      </div>
+    <!-- ==========END CHECKIN/OUT========== -->
+  </div>
+</div>
+
+<!-- ==========MODAL PHÂN CÔNG CA==========  -->
+<div class="modal-overlay" *ngIf="isAssignShiftModalOpen" (click)="closeAssignShiftModal()"></div>
+
+<div class="modal-box" *ngIf="isAssignShiftModalOpen">
+  <div class="modal-header">
+    <h3 class="modal-title">Phân công ca làm việc</h3>
+    <button class="btn-icon modal-close-btn" (click)="closeAssignShiftModal()">
+      <i data-feather="x"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="input-group">
+      <label for="shiftSelect">Chọn ca làm việc</label>
+      <select id="shiftSelect" name="shiftSelect" [(ngModel)]="selectedShift">
+        <option [ngValue]="null" disabled>Chọn ca làm việc</option>
+        <option *ngFor="let shift of shifts" [ngValue]="shift.id">{{ shift.name }}</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Phân công cho</label>
+      <div class="toggle-group">
+        <button class="toggle-btn" [class.active]="assignTargetTab === 'employee'" (click)="selectAssignTargetTab('employee')">
+          <i data-feather="user"></i> Nhân viên
+        </button>
+        <button class="toggle-btn" [class.active]="assignTargetTab === 'department'" (click)="selectAssignTargetTab('department')">
+          <i data-feather="users"></i> Phòng ban
+        </button>
+        <button class="toggle-btn" [class.active]="assignTargetTab === 'position'" (click)="selectAssignTargetTab('position')">
+          <i data-feather="briefcase"></i> Vị trí
+        </button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-group">
+        <label for="startDate">Ngày bắt đầu</label>
+        <input id="startDate" name="startDate" type="text" value="03/08/2025">
+      </div>
+      <div class="input-group">
+        <label for="endDate">Ngày kết thúc</label>
+        <input id="endDate" name="endDate" type="text" placeholder="dd/mm/yyyy (để trống nếu vô thời hạn)">
+      </div>
+    </div>
+
+    <div *ngIf="assignTargetTab === 'employee'">
+      <div class="input-group">
+        <label>Chọn nhân viên</label>
+        <div class="employee-list">
+          <div class="employee-item" *ngFor="let emp of employees">
+            <div class="employee-info">
+              <div class="user-avatar-small">{{ emp.name.charAt(0) }}</div>
+              <div>
+                <div class="employee-name">{{ emp.name }} - {{ emp.code }}</div>
+                <div class="employee-role">{{ emp.role }}</div>
+              </div>
+            </div>
+            <input type="checkbox" [(ngModel)]="emp.selected" [name]="'emp' + emp.id">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="assignTargetTab === 'department'">
+        <div class="input-group">
+          <div class="list-header">
+            <label>Chọn phòng ban</label>
+            <span>Đã chọn: 0/0</span>
+          </div>
+          <div class="empty-list-placeholder">
+            <i data-feather="calendar"></i>
+            <p>Không có phòng ban nào</p>
+          </div>
+        </div>
+      </div>
+
+    <div *ngIf="assignTargetTab === 'position'">
+        <div class="input-group">
+            <div class="list-header">
+                <label>Chọn vị trí</label>
+                <span>Đã chọn: 0/18</span>
+            </div>
+            <div class="position-list">
+                <div class="position-item" *ngFor="let pos of positions">
+                    <div class="position-info">
+                        <div class="position-name">{{ pos.name }}</div>
+                        <div class="position-subtitle">Vị trí</div>
+                    </div>
+                    <input type="checkbox" [(ngModel)]="pos.selected" [name]="'pos' + pos.id">
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="closeAssignShiftModal()">Hủy</button>
+    <button class="btn btn-primary" (click)="assignShift()" [disabled]="!selectedShift">
+      Phân công
+    </button>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isCreateShiftModalOpen" (click)="closeCreateShiftModal()"></div>
+
+<div class="modal-box large" *ngIf="isCreateShiftModalOpen">
+  <div class="modal-header">
+    <h3 class="modal-title">Tạo ca làm việc mới</h3>
+    <button class="btn-icon modal-close-btn" (click)="closeCreateShiftModal()">
+      <i data-feather="x"></i>
+    </button>
+  </div>
+
+<div class="modal-body">
+    <div class="modal-tabs">
+      <button class="modal-tab-item" [class.active]="createShiftActiveTab === 'basic'" (click)="selectCreateShiftTab('basic')">
+        <i data-feather="info"></i> Thông tin cơ bản
+      </button>
+      <button class="modal-tab-item" [class.active]="createShiftActiveTab === 'schedule'" (click)="selectCreateShiftTab('schedule')">
+        <i data-feather="calendar"></i> Lịch trình
+      </button>
+      <button class="modal-tab-item" [class.active]="createShiftActiveTab === 'advanced'" (click)="selectCreateShiftTab('advanced')">
+        <i data-feather="sliders"></i> Nâng cao
+      </button>
+    </div>
+
+    <div class="modal-tab-content" *ngIf="createShiftActiveTab === 'basic'">
+      <form class="settings-form">
+        <div class="form-row">
+          <div class="input-group">
+            <label>Tên ca làm việc *</label>
+            <input type="text" placeholder="Ca hành chính" [(ngModel)]="newShiftData.name" name="shiftName">
+          </div>
+          <div class="input-group">
+            <label>Loại ca *</label>
+            <select [(ngModel)]="newShiftData.type" name="shiftType">
+              <option value="full-time">Full-time (8 giờ)</option>
+              <option value="part-time">Part-time (4 giờ)</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Mô tả</label>
+          <textarea placeholder="Mô tả về ca làm việc" [(ngModel)]="newShiftData.description" name="shiftDesc"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="input-group">
+            <label>Màu sắc ca làm việc</label>
+            <div class="color-selector-wrapper">
+              <div class="selected-color-preview" (click)="toggleColorPicker()">
+                <span class="color-swatch" [style.background-color]="newShiftData.color"></span>
+                <span>{{ newShiftData.color === '#3498db' ? 'Xanh dương' : 'Màu tùy chỉnh' }}</span>
+              </div>
+
+              <div class="color-picker-popover" *ngIf="isColorPickerOpen">
+                <label class="popover-label">Màu sẵn có</label>
+                <div class="color-grid">
+                  <div
+                    *ngFor="let color of predefinedColors"
+                    class="color-swatch"
+                    [style.background-color]="color"
+                    (click)="selectColor(color)">
+                  </div>
+                </div>
+                <label class="popover-label">Màu tùy chỉnh</label>
+                <div class="custom-color-row">
+                  <input type="color" [(ngModel)]="customColor" name="customColorInput">
+                  <button type="button" class="btn btn-secondary" (click)="applyCustomColor()">Áp dụng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label>Hệ số công việc</label>
+            <input type="number" step="0.1" [(ngModel)]="newShiftData.coefficient" name="shiftCoeff">
+            <small>Hệ số 1.0 = 1 công, Hệ số 0.5 = 0.5 công</small>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Cài đặt chấm công *</label>
+          <select [(ngModel)]="newShiftData.attendanceSettings" name="shiftSettings">
+            <option value="default">Cài đặt chấm công mặc định</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="closeCreateShiftModal()">Hủy</button>
+    <button class="btn btn-primary" (click)="createShift()">
+      Tạo ca mới
+    </button>
+  </div>
+</div>

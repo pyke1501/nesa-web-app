@@ -1,0 +1,313 @@
+<div class="employee-management-container">
+  <h1 class="page-title">Quản lý nhân sự</h1>
+  <p class="page-subtitle">Quản lý thông tin nhân viên, phòng ban và các chính sách công ty</p>
+
+  <div class="summary-grid">
+    <div class="card summary-card blue">
+      <div class="icon-wrapper"><i data-feather="users"></i></div>
+      <div class="info-wrapper">
+        <div class="value">1</div>
+        <div class="label">Tổng nhân viên</div>
+        <div class="status"><i data-feather="trending-up"></i> 1/1 đang làm việc</div>
+      </div>
+    </div>
+    <div class="card summary-card green">
+      <div class="icon-wrapper"><i data-feather="briefcase"></i></div>
+      <div class="info-wrapper">
+        <div class="value">0</div>
+        <div class="label">Phòng ban</div>
+        <div class="status"><i data-feather="trending-up"></i> Đang hoạt động</div>
+      </div>
+    </div>
+    <div class="card summary-card purple">
+      <div class="icon-wrapper"><i data-feather="user-check"></i></div>
+      <div class="info-wrapper">
+        <div class="value">1</div>
+        <div class="label">Nhân viên hoạt động</div>
+        <div class="status"><i data-feather="trending-up"></i> Đang làm việc</div>
+      </div>
+    </div>
+    <div class="card summary-card orange">
+      <div class="icon-wrapper"><i data-feather="file-text"></i></div>
+      <div class="info-wrapper">
+        <div class="value">0</div>
+        <div class="label">Quy định hiệu lực</div>
+        <div class="status"><i data-feather="trending-up"></i> Đang áp dụng</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card main-content-card">
+    <nav class="tabs">
+      <a href="javascript:void(0)" class="tab-item" [class.active]="activeTab === 'employee'" (click)="selectTab('employee')">Nhân viên</a>
+      <a href="javascript:void(0)" class="tab-item" [class.active]="activeTab === 'department'" (click)="selectTab('department')">Phòng ban</a>
+      <a href="javascript:void(0)" class="tab-item" [class.active]="activeTab === 'title'" (click)="selectTab('title')">Chức vụ</a>
+      <a href="javascript:void(0)" class="tab-item" [class.active]="activeTab === 'competency'" (click)="selectTab('competency')">Khung năng lực</a>
+      <a href="javascript:void(0)" class="tab-item" [class.active]="activeTab === 'training'" (click)="selectTab('training')">Đào tạo</a>
+      <a href="javascript:void(0)" class="tab-item" [class.active]="activeTab === 'policy'" (click)="selectTab('policy')">Chính sách</a>
+    </nav>
+
+    <div *ngIf="activeTab === 'employee'">
+      <div class="filter-bar">
+        <div class="search-box">
+          <i data-feather="search"></i>
+          <input type="text" placeholder="Tìm kiếm nhân viên...">
+        </div>
+        <select class="filter-select">
+          <option>Tất cả phòng ban</option>
+        </select>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo nhân viên</button>
+      </div>
+
+      <div class="employee-table-wrapper">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Mã NV</th>
+              <th>Họ tên</th>
+              <th>Số điện thoại</th>
+              <th>Phòng ban</th>
+              <th>Chức vụ</th>
+              <th>Cấp bậc</th>
+              <th>Trạng thái</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td>{{ employee.id }}</td>
+              <td>{{ employee.name }}</td>
+              <td>{{ employee.phone }}</td>
+              <td>{{ employee.department }}</td>
+              <td>{{ employee.title }}</td>
+              <td><span class="tag-level">{{ employee.level }}</span></td>
+              <td><span class="tag-status active">{{ employee.status }}</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon"><i data-feather="eye"></i></button>
+                  <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                  <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'department'">
+      <div class="filter-bar">
+        <div class="search-box">
+          <i data-feather="search"></i>
+          <input type="text" placeholder="Tìm kiếm phòng ban...">
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo phòng ban</button>
+      </div>
+
+      <div class="employee-table-wrapper">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Tên phòng ban</th>
+              <th>Mô tả</th>
+              <th>Số lượng nhân sự</th>
+              <th>Trạng thái</th>
+              <th>Ngày tạo</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'title'">
+      <div class="filter-bar">
+        <div class="search-box">
+          <i data-feather="search"></i>
+          <input type="text" placeholder="Tìm kiếm chức vụ...">
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo chức vụ</button>
+      </div>
+
+      <div class="job-title-list">
+        <div class="card job-title-item" *ngFor="let title of jobTitles">
+          <div class="job-title-info">
+            <h3 class="job-title-name">
+              {{ title.name }}
+              <span class="tag-level-alt">{{ title.level }}</span>
+              <span class="tag-status active">{{ title.status }}</span>
+            </h3>
+            <p class="job-title-description">{{ title.description }}</p>
+            <small class="job-title-date">Ngày tạo: {{ title.createdDate }}</small>
+          </div>
+          <div class="action-buttons">
+            <button class="btn-icon"><i data-feather="edit-2"></i></button>
+            <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'competency'">
+      <div class="filter-bar">
+        <div class="search-box">
+          <i data-feather="search"></i>
+          <input type="text" placeholder="Tìm kiếm khung năng lực...">
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo khung năng lực</button>
+      </div>
+
+      <div class="employee-table-wrapper">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Tên khung năng lực</th>
+              <th>Vị trí</th>
+              <th>Mô tả</th>
+              <th>Trạng thái</th>
+              <th>Ngày tạo</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let framework of competencyFrameworks">
+              <td>{{ framework.name }}</td>
+              <td>{{ framework.position }}</td>
+              <td>{{ framework.description }}</td>
+              <td><span class="tag-status active">{{ framework.status }}</span></td>
+              <td>{{ framework.createdDate }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon"><i data-feather="eye"></i></button>
+                  <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                  <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'training'">
+      <h2 class="section-title">Quản lý đào tạo</h2>
+      <p class="section-description">Quản lý yêu cầu đào tạo và tiến độ học tập của nhân viên</p>
+
+      <div class="training-summary-grid">
+        <div class="card summary-card training-request">
+          <div class="icon-wrapper"><i data-feather="book-open"></i></div>
+          <div class="info-wrapper">
+            <div class="value">1 / 1</div>
+            <div class="label">Yêu cầu đào tạo</div>
+          </div>
+        </div>
+        <div class="card summary-card training-pending">
+          <div class="icon-wrapper"><i data-feather="clock"></i></div>
+          <div class="info-wrapper">
+            <div class="value">0</div>
+            <div class="label">Đang chờ thực hiện</div>
+          </div>
+        </div>
+        <div class="card summary-card training-done">
+          <div class="icon-wrapper"><i data-feather="check-circle"></i></div>
+          <div class="info-wrapper">
+            <div class="value">0</div>
+            <div class="label">Đã hoàn thành</div>
+          </div>
+        </div>
+        <div class="card summary-card training-expired">
+          <div class="icon-wrapper"><i data-feather="user-x"></i></div>
+          <div class="info-wrapper">
+            <div class="value">0</div>
+            <div class="label">Quá hạn</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-tab-bar">
+        <div class="sub-tabs">
+          <button class="sub-tab-item" [class.active]="trainingSubTab === 'requests'" (click)="selectTrainingSubTab('requests')">Yêu cầu đào tạo</button>
+          <button class="sub-tab-item" [class.active]="trainingSubTab === 'assignments'" (click)="selectTrainingSubTab('assignments')">Phân công đào tạo</button>
+        </div>
+        <div class="filter-bar">
+            <div class="search-box">
+              <i data-feather="search"></i>
+              <input type="text" placeholder="Tìm kiếm...">
+            </div>
+            <button class="btn btn-primary"><i data-feather="plus"></i> Tạo yêu cầu mới</button>
+        </div>
+      </div>
+
+      <div class="employee-table-wrapper">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Chương trình đào tạo</th>
+              <th>Đối tượng</th>
+              <th>Trạng thái</th>
+              <th>Khóa học</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let req of trainingRequests">
+              <td class="program-cell">{{ req.program }}</td>
+              <td><span class="tag-level">{{ req.audience }}</span></td>
+              <td><span class="tag-status active">{{ req.status }}</span></td>
+              <td><button class="btn btn-secondary btn-view-course"><i data-feather="external-link"></i> Xem khóa học</button></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon"><i data-feather="eye"></i></button>
+                  <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                  <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        Hiển thị 1 yêu cầu đào tạo
+        <div class="footer-legend">
+          <span><span class="dot active"></span>Đang hoạt động: 1</span>
+          <span><span class="dot suspended"></span>Tạm dừng: 0</span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'policy'">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Quy định công ty</h2>
+          <p class="section-description">Quản lý các quy định và chính sách của công ty</p>
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo quy định mới</button>
+      </div>
+
+      <div class="filter-bar">
+        <div class="search-box">
+          <i data-feather="search"></i>
+          <input type="text" placeholder="Tìm kiếm quy định...">
+        </div>
+        <select class="filter-select">
+          <option>Tất cả loại</option>
+        </select>
+        <select class="filter-select">
+          <option>Tất cả trạng thái</option>
+        </select>
+      </div>
+
+      <div class="policy-placeholder">
+        <div class="placeholder-icon">
+          <i data-feather="users"></i>
+        </div>
+        <h3>Chưa có quy định nào</h3>
+        <p>Tạo quy định đầu tiên cho công ty của bạn</p>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo quy định mới</button>
+      </div>
+    </div>
+
+  </div>
+</div>

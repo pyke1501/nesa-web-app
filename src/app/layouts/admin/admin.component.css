@@ -1,5 +1,3 @@
-/* src/app/app.component.css */
-
 :host {
   display: block;
   height: 100%;
@@ -7,17 +5,18 @@
 
 .app-layout {
   display: grid;
-  /* Sidebar tự động co giãn, nội dung chính chiếm phần còn lại */
   grid-template-columns: auto 1fr;
   height: 100%;
+  overflow: hidden;
 }
 
 .main-content-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow-y: auto; /* Cho phép cuộn khi nội dung dài */
+  overflow-y: auto;
   background-color: var(--bg-main);
+  position: relative; /* <-- THÊM DÒNG NÀY */
 }
 
 .main-header {
@@ -28,6 +27,9 @@
   background-color: #fff;
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .header-left {
@@ -40,6 +42,9 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--primary-blue);
+  height: 24px;
+  width: auto;
+  object-fit: contain;
 }
 
 .collapse-btn {
@@ -58,17 +63,6 @@
 .collapse-btn:hover {
   background-color: var(--bg-main);
   color: var(--primary-blue);
-}
-
-/* CSS cho Feather icons */
-.collapse-btn i {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .page-content {

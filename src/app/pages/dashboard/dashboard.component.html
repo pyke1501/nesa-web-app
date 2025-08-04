@@ -1,0 +1,145 @@
+<header class="main-header">
+  <div class="header-greeting">
+      <h4>Chào buổi tối</h4>
+      <h1>Chào mừng trở lại, {{ userName }}!</h1>
+      <p>Thành công đến từ sự kiên trì và nỗ lực không ngừng</p>
+  </div>
+  <div class="header-date">
+      <i data-feather="calendar"></i>
+      <span>{{ (clock$ | async) | date:'EEEE, d MMMM, y':'vi' }}</span>
+  </div>
+</header>
+
+<div class="content-grid">
+  <div class="card card-stats">
+      <h3 class="card-title">Chấm công tháng này</h3>
+      <div class="stat-item"><span>Tổng ngày làm</span><span class="value">0</span></div>
+      <div class="stat-item"><span>Có mặt</span><span class="value">0</span></div>
+      <div class="stat-item"><span>Đi muộn</span><span class="value">0</span></div>
+      <div class="stat-item"><span>Tỷ lệ đúng giờ</span><span class="value progress">0%</span></div>
+  </div>
+
+  <div class="card card-stats">
+      <h3 class="card-title">OKR của tôi</h3>
+      <div class="stat-item"><span>Tổng OKRs</span><span class="value">0</span></div>
+      <div class="stat-item"><span>Hoàn thành</span><span class="value">0</span></div>
+      <div class="stat-item"><span>Đang thực hiện</span><span class="value">0</span></div>
+      <div class="stat-item"><span>Tiến độ trung bình</span><span class="value progress">0%</span></div>
+  </div>
+
+  <div class="card card-check-in">
+    <div class="check-in-status">
+      <span>Trạng thái:
+        <strong [ngClass]="{'checked-in': (timekeepingService.isCheckedIn$ | async)}">
+          {{ (timekeepingService.isCheckedIn$ | async) ? 'Đang làm việc' : 'Chưa check-in' }}
+        </strong>
+      </span>
+      <span>Giờ làm việc: <strong>{{ timekeepingService.workDuration$ | async }}</strong></span>
+    </div>
+
+    <div class="check-in-status">
+        <span><i data-feather="map-pin"></i> Văn phòng chính</span>
+    </div>
+
+    <button *ngIf="!(timekeepingService.isCheckedIn$ | async)" class="btn btn-check-in" (click)="handleCheckInToggle()">
+        <i data-feather="log-in"></i> Check in
+    </button>
+    <button *ngIf="(timekeepingService.isCheckedIn$ | async)" class="btn btn-check-out" (click)="handleCheckInToggle()">
+        <i data-feather="log-out"></i> Check out
+    </button>
+
+    <p class="check-in-note">
+      {{ (timekeepingService.isCheckedIn$ | async) ? 'Nhớ check-out khi kết thúc ca làm việc' : 'Hãy check-in để bắt đầu ngày làm việc' }}
+    </p>
+  </div>
+
+  <div class="checkin-toast" *ngIf="checkInNotification.show">
+    {{ checkInNotification.message }}
+  </div>
+
+  <div class="card card-quick-actions-container">
+      <h3 class="card-title">Thao tác nhanh</h3>
+      <div class="quick-actions-grid">
+          <div class="action-card action-check-in">
+              <i data-feather="log-in"></i>
+              <h4>Chấm công</h4>
+              <p>Check in/Check out hôm nay</p>
+          </div>
+          <div class="action-card action-leave">
+              <i data-feather="file-plus"></i>
+              <h4>Xin nghỉ phép</h4>
+              <p>Tạo yêu cầu nghỉ phép</p>
+          </div>
+          <div class="action-card action-okr">
+              <i data-feather="eye"></i>
+              <h4>Xem OKR</h4>
+              <p>Theo dõi mục tiêu cá nhân</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="card card-reminders">
+      <h3 class="card-title">Nhắc nhở hôm nay</h3>
+      <ul>
+          <li><i data-feather="check-circle"></i> Chấm công lúc đầu giờ</li>
+          <li><i data-feather="check-circle"></i> Cập nhật tiến độ OKR</li>
+          <li><i data-feather="check-circle"></i> Kiểm tra thông báo mới</li>
+      </ul>
+  </div>
+</div>
+
+<div class="content-grid-bottom">
+    <div class="card">
+        <h3 class="card-title">Bảng xếp hạng OKR công ty</h3>
+        <p>Nội dung bảng xếp hạng...</p>
+    </div>
+
+    <div class="card">
+        <h3 class="card-title">Hoạt động gần đây</h3>
+        <ul class="activity-list">
+            <li class="activity-item">
+                <div class="activity-icon info"><i data-feather="info"></i></div>
+                <div class="activity-content">
+                    <p>Bạn đã cập nhật tiến độ cho OKR <strong>"Hoàn thành..."</strong></p>
+                    <small>1 giờ trước</small>
+                </div>
+            </li>
+            <li class="activity-item">
+                <div class="activity-icon success"><i data-feather="check"></i></div>
+                <div class="activity-content">
+                    <p>Yêu cầu nghỉ phép của bạn đã được duyệt</p>
+                    <small>Hôm qua</small>
+                </div>
+            </li>
+             <li class="activity-item">
+                <div class="activity-icon warning"><i data-feather="trending-up"></i></div>
+                <div class="activity-content">
+                    <p>OKR <strong>"Tăng trưởng người dùng"</strong> sắp đến hạn</p>
+                    <small>2 ngày trước</small>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card card-placeholder">
+        <h3 class="card-title">Mô tả công việc của tôi</h3>
+        <div class="placeholder-content">
+            <i data-feather="book-open"></i>
+            <p>Chưa có dữ liệu mô tả công việc</p>
+        </div>
+    </div>
+
+    <div class="card card-placeholder">
+        <h3 class="card-title">Khung năng lực của tôi</h3>
+        <div class="placeholder-content">
+            <i data-feather="award"></i>
+            <p>Chưa có dữ liệu khung năng lực</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="card full-width-card">
+    <h3 class="card-title">Các khóa học được giao</h3>
+    <p>Nội dung các khóa học...</p>
+</div>

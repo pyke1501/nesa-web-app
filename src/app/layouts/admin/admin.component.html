@@ -1,0 +1,18 @@
+<div class="app-layout">
+  <app-sidebar [class.collapsed]="isSidebarCollapsed"></app-sidebar>
+
+  <main class="main-content-wrapper">
+    <header class="main-header">
+      <div class="header-left">
+        <button class="collapse-btn" (click)="toggleSidebar()">
+          <span class="toggle-icon">{{ isSidebarCollapsed ? '|>' : '<|' }}</span>
+        </button>
+        <img src="https://lovinbot-ai.b-cdn.net/upload_files/9634c29f-a796-42ff-860e-fcff05238b90/97017efc-ae6b-4542-9e3b-47baf5569457.png" alt="NESA Logo" class="logo">
+      </div>
+    </header>
+
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

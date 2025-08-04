@@ -1,0 +1,163 @@
+<div class="process-management-container">
+  <h1 class="page-title">Quản lý tài liệu hướng dẫn</h1>
+  <p class="page-subtitle">Tạo và quản lý các tài liệu hướng dẫn công việc cho nhân viên</p>
+
+  <div class="summary-grid">
+    <div class="card summary-card blue">
+      <div class="info-wrapper">
+        <div class="value">1</div>
+        <div class="label">Tổng tài liệu</div>
+        <div class="status trend-up">+3 so với tháng trước</div>
+      </div>
+      <div class="icon-wrapper"><i data-feather="file-text"></i></div>
+    </div>
+    <div class="card summary-card green">
+      <div class="info-wrapper">
+        <div class="value">1</div>
+        <div class="label">Đang áp dụng</div>
+        <div class="status trend-up">+2 so với tháng trước</div>
+      </div>
+      <div class="icon-wrapper"><i data-feather="check-circle"></i></div>
+    </div>
+    <div class="card summary-card orange">
+      <div class="info-wrapper">
+        <div class="value">0</div>
+        <div class="label">Tạm dừng</div>
+        <div class="status trend-up">+1 so với tháng trước</div>
+      </div>
+      <div class="icon-wrapper"><i data-feather="pause-circle"></i></div>
+    </div>
+    <div class="card summary-card purple">
+      <div class="info-wrapper">
+        <div class="value">1,247</div>
+        <div class="label">Lượt xem tháng</div>
+        <div class="status trend-up">+15% so với tháng trước</div>
+      </div>
+      <div class="icon-wrapper"><i data-feather="eye"></i></div>
+    </div>
+  </div>
+
+  <div class="card main-content-card">
+    <nav class="sub-tabs-alt">
+      <button class="sub-tab-item" [class.active]="activeSubTab === 'list'" (click)="selectSubTab('list')">Danh sách</button>
+      <button class="sub-tab-item" [class.active]="activeSubTab === 'create'" (click)="selectSubTab('create')">Tạo tài liệu</button>
+    </nav>
+
+    <div *ngIf="activeSubTab === 'list'">
+      <div class="filter-bar">
+        <h3 class="section-title">Danh sách tài liệu</h3>
+        <div class="filter-actions">
+          <div class="search-box">
+            <i data-feather="search"></i>
+            <input type="text" placeholder="Tìm kiếm tài liệu...">
+          </div>
+          <select class="filter-select">
+            <option>Tất cả danh mục</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="employee-table-wrapper">
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <th>Tên tài liệu</th>
+              <th>Danh mục</th>
+              <th>Trạng thái</th>
+              <th>Độ ưu tiên</th>
+              <th>Đối tượng</th>
+              <th>Ngày tạo</th>
+              <th>Liên kết</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let process of processes">
+              <td>{{ process.name }}</td>
+              <td><span class="tag-category">{{ process.category }}</span></td>
+              <td><span class="tag-status active">{{ process.status }}</span></td>
+              <td><span class="tag-priority high">{{ process.priority }}</span></td>
+              <td><i data-feather="users" class="table-icon"></i> {{ process.audience }}</td>
+              <td><i data-feather="calendar" class="table-icon"></i> {{ process.createdDate }}</td>
+              <td><a [href]="process.link" target="_blank"><i data-feather="link"></i></a></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="activeSubTab === 'create'">
+      <h3 class="section-title">Tạo tài liệu hướng dẫn mới</h3>
+      <form class="create-doc-form">
+        <div class="form-grid-2col">
+          <div class="input-group">
+            <label>Tiêu đề tài liệu *</label>
+            <input type="text" placeholder="Nhập tiêu đề tài liệu hướng dẫn...">
+          </div>
+          <div class="input-group">
+            <label>Danh mục *</label>
+            <select><option>Chọn danh mục</option></select>
+          </div>
+        </div>
+        <div class="form-grid-4col">
+          <div class="input-group">
+            <label>Trạng thái</label>
+            <select><option>Đang áp dụng</option></select>
+          </div>
+          <div class="input-group">
+            <label>Độ ưu tiên</label>
+            <select><option>Trung bình</option></select>
+          </div>
+          <div class="input-group">
+            <label>Đối tượng áp dụng</label>
+            <select><option>Tất cả nhân viên</option></select>
+          </div>
+          <div class="input-group tags-input">
+            <label>Từ khóa (Tags)</label>
+            <input type="text" placeholder="Thêm từ khóa...">
+            <button type="button" class="btn btn-primary"><i data-feather="plus"></i></button>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Nội dung hướng dẫn chi tiết *</label>
+          <div class="rich-text-editor">
+            <div class="toolbar">
+              <button type="button"><i data-feather="bold"></i></button>
+              <button type="button"><i data-feather="italic"></i></button>
+              <button type="button"><i data-feather="underline"></i></button>
+              </div>
+            <textarea placeholder="Soạn thảo nội dung hướng dẫn chi tiết..."></textarea>
+          </div>
+        </div>
+        <div class="form-grid-2col">
+          <div class="input-group">
+            <label>Liên kết tham khảo</label>
+            <div class="link-input">
+              <input type="text" placeholder="Tiêu đề liên kết...">
+              <input type="text" placeholder="URL...">
+            </div>
+            <button type="button" class="btn btn-secondary"><i data-feather="plus"></i> Thêm liên kết</button>
+          </div>
+          <div class="input-group">
+            <label>Tệp đính kèm</label>
+            <div class="file-dropzone">
+              <i data-feather="upload-cloud"></i>
+              <p>Kéo thả file hoặc click để chọn</p>
+              <small>PDF, DOC, DOCX, XLSX (Max 10MB mỗi file)</small>
+              <button type="button" class="btn btn-secondary"><i data-feather="paperclip"></i> Chọn tệp</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-footer">
+          <button type="button" class="btn btn-secondary">Hủy</button>
+          <button type="submit" class="btn btn-primary">Tạo tài liệu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

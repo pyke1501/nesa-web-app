@@ -1,0 +1,12 @@
+{
+  "profile": {
+    "fullName": "Nguyễn Thắng",
+    "title": "Trưởng phòng Nhân sự",
+    "email": "nesatuyendung@gmail.com",
+    "password": "123456",
+    "phone": "0352565538",
+    "emergencyContactPhone": "0901234567",
+    "address": "Long Biên, Hà Nội",
+    "emergencyContactName": "Người thân"
+  }
+}

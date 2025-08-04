@@ -1,0 +1,77 @@
+<div class="settings-container">
+  <h1 class="page-title">Cài đặt tài khoản</h1>
+  <p class="page-subtitle">Quản lý thông tin cá nhân và cài đặt bảo mật.</p>
+
+    <form class="card settings-form" (ngSubmit)="saveProfile()">
+      <h3 class="form-title">
+        <i data-feather="user"></i>
+        Thông tin cá nhân
+      </h3>
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="fullName">Họ và tên *</label>
+          <input id="fullName" name="fullName" type="text" [(ngModel)]="userProfile.fullName">
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" [(ngModel)]="userProfile.email" disabled>
+          <small>Email không thể thay đổi</small>
+        </div>
+        <div class="input-group">
+          <label for="phone">Số điện thoại</label>
+          <input id="phone" name="phone" type="text" [(ngModel)]="userProfile.phone">
+        </div>
+        <div class="input-group">
+          <label for="emergencyContactPhone">SĐT người liên hệ khẩn cấp</label>
+          <input id="emergencyContactPhone" name="emergencyContactPhone" type="text" [(ngModel)]="userProfile.emergencyContactPhone">
+        </div>
+        <div class="input-group full-width">
+          <label for="address">Địa chỉ</label>
+          <input id="address" name="address" type="text" [(ngModel)]="userProfile.address">
+        </div>
+        <div class="input-group full-width">
+          <label for="emergencyContactName">Người liên hệ khẩn cấp</label>
+          <input id="emergencyContactName" name="emergencyContactName" type="text" placeholder="Tên người liên hệ" [(ngModel)]="userProfile.emergencyContactName">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary"><i data-feather="save"></i>Lưu thông tin</button>
+
+        <div class="success-toast" *ngIf="showSuccessToast">
+          Đã lưu thông tin thành công
+        </div>
+      </div>
+    </form>
+
+  <form class="card settings-form" (ngSubmit)="changePassword()" #passwordForm="ngForm">
+    <h3 class="form-title">
+      <i data-feather="lock"></i>
+      Đổi mật khẩu
+    </h3>
+    <div class="form-grid">
+      <div class="input-group full-width">
+        <label for="currentPassword">Mật khẩu hiện tại *</label>
+        <input id="currentPassword" name="currentPassword" type="password" [(ngModel)]="passwordData.currentPassword" required>
+      </div>
+      <div class="input-group">
+        <label for="newPassword">Mật khẩu mới *</label>
+        <input id="newPassword" name="newPassword" type="password" [(ngModel)]="passwordData.newPassword" required>
+      </div>
+      <div class="input-group">
+        <label for="confirmPassword">Xác nhận mật khẩu mới *</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" [(ngModel)]="passwordData.confirmPassword" required>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-danger" [disabled]="!passwordForm.valid"><i data-feather="key"></i>Đổi mật khẩu</button>
+
+      <div class="success-toast" *ngIf="passwordSuccessMessage">
+        {{ passwordSuccessMessage }}
+      </div>
+      <div class="error-toast" *ngIf="passwordErrorMessage">
+        {{ passwordErrorMessage }}
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,303 @@
+<div class="okr-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Quản lý OKR</h1>
+      <p class="page-subtitle">Chu kỳ hiện tại: Q4 2024 - 1/10/2024 - 31/12/2024</p>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-secondary"><i data-feather="bar-chart-2"></i> Báo cáo</button>
+      <button class="btn btn-primary"><i data-feather="plus"></i> Tạo OKR mới</button>
+    </div>
+  </div>
+
+  <nav class="okr-tabs">
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'overview'" (click)="selectTab('overview')"><i data-feather="grid"></i> Tổng quan</a>
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'company'" (click)="selectTab('company')"><i data-feather="briefcase"></i> Công ty</a>
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'department'" (click)="selectTab('department')"><i data-feather="users"></i> Phòng ban</a>
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'personal'" (click)="selectTab('personal')"><i data-feather="user"></i> Cá nhân</a>
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'analysis'" (click)="selectTab('analysis')"><i data-feather="pie-chart"></i> Phân tích</a>
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'ranking'" (click)="selectTab('ranking')"><i data-feather="award"></i> Bảng xếp hạng</a>
+    <a href="javascript:void(0)" class="okr-tab-item" [class.active]="activeTab === 'settings'" (click)="selectTab('settings')"><i data-feather="settings"></i> Cài đặt</a>
+  </nav>
+
+  <div *ngIf="activeTab === 'overview'">
+    <div class="okr-main-grid">
+      <div class="card cycle-progress-card">
+        <h3 class="card-title"><i data-feather="activity"></i> Tiến độ chu kỳ</h3>
+        <div class="progress-stats">
+          <div class="stat-item">
+            <div class="value blue">100%</div>
+            <div class="label">Hoàn thành</div>
+            <div class="progress-bar"><div class="progress blue" style="width: 100%;"></div></div>
+          </div>
+          <div class="stat-item"><div class="value">308</div><div class="label">Ngày đã qua</div></div>
+          <div class="stat-item"><div class="value">0</div><div class="label">Ngày còn lại</div></div>
+          <div class="stat-item"><div class="value">91</div><div class="label">Tổng số ngày</div></div>
+        </div>
+      </div>
+
+      <div class="okr-stats-grid">
+        <div class="card stat-card"><div class="card-header"><span>Tổng số OKR</span><i data-feather="info"></i></div><div class="value">2</div><div class="label">0 hoàn thành</div></div>
+        <div class="card stat-card"><div class="card-header"><span>Đang tiến độ</span><i data-feather="trending-up"></i></div><div class="value">1</div><div class="label">50%</div><div class="progress-bar"><div class="progress" style="width: 50%;"></div></div></div>
+        <div class="card stat-card"><div class="card-header"><span>Có rủi ro</span><i data-feather="alert-circle"></i></div><div class="value">0</div><div class="label">0%</div></div>
+        <div class="card stat-card"><div class="card-header"><span>Quá hạn</span><i data-feather="alert-octagon"></i></div><div class="value">1</div><div class="label">50%</div><div class="progress-bar"><div class="progress red" style="width: 50%;"></div></div></div>
+        <div class="card stat-card"><div class="card-header"><span>OKR Công ty</span><i data-feather="briefcase"></i></div><div class="value">1</div><div class="label">Mục tiêu cấp công ty</div></div>
+        <div class="card stat-card"><div class="card-header"><span>OKR Phòng ban</span><i data-feather="users"></i></div><div class="value">0</div><div class="label">Mục tiêu cấp phòng ban</div></div>
+        <div class="card stat-card"><div class="card-header"><span>OKR Cá nhân</span><i data-feather="user"></i></div><div class="value">1</div><div class="label">Mục tiêu cá nhân</div></div>
+        <div class="card stat-card"><div class="card-header"><span>Điểm liên kết</span><i data-feather="git-merge"></i></div><div class="value">50%</div><div class="label">Mức độ liên kết OKR</div></div>
+      </div>
+
+      <div class="card alignment-flow-card">
+        <h3 class="card-title"><i data-feather="git-pull-request"></i> Luồng liên kết OKR</h3>
+        <p class="card-subtitle">Mức độ liên kết từ cấp Công ty → Phòng ban → Cá nhân</p>
+        <div class="flow-items">
+          <div class="flow-item"><div class="icon-wrapper blue"><i data-feather="briefcase"></i></div><h4>Công ty</h4><p>Tầm nhìn chiến lược</p></div>
+          <div class="flow-item"><div class="icon-wrapper green"><i data-feather="users"></i></div><h4>Phòng ban</h4><p>Kế hoạch thực thi</p></div>
+          <div class="flow-item"><div class="icon-wrapper purple"><i data-feather="user"></i></div><h4>Cá nhân</h4><p>Hành động cụ thể</p></div>
+        </div>
+      </div>
+
+      <div class="management-grid">
+        <a href="#" class="card management-card"><div class="icon-wrapper blue"><i data-feather="briefcase"></i></div><div class="info"><h4>Quản lý OKR Công ty</h4><p>Xem và quản lý mục tiêu cấp công ty</p></div></a>
+        <a href="#" class="card management-card"><div class="icon-wrapper green"><i data-feather="users"></i></div><div class="info"><h4>Quản lý OKR Phòng ban</h4><p>Xem và quản lý mục tiêu cấp phòng ban</p></div></a>
+        <a href="#" class="card management-card"><div class="icon-wrapper purple"><i data-feather="user"></i></div><div class="info"><h4>Quản lý OKR Cá nhân</h4><p>Xem và quản lý mục tiêu cá nhân</p></div></a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'company'">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title"><i data-feather="briefcase"></i> OKRs Công ty</h2>
+        <p class="section-description">Quản lý và theo dõi các mục tiêu cấp công ty</p>
+      </div>
+      <button class="btn btn-primary"><i data-feather="plus"></i> Tạo OKR Công ty</button>
+    </div>
+    <div class="company-stats-grid">
+        <div class="card stat-simple"><span>Tổng số OKR</span><strong>1</strong></div>
+        <div class="card stat-simple"><span>Hoàn thành</span><strong>0</strong></div>
+        <div class="card stat-simple"><span>Đúng tiến độ</span><strong>1</strong></div>
+        <div class="card stat-simple"><span>Cần chú ý</span><strong>0</strong></div>
+    </div>
+    <div class="card okr-detail-card" *ngFor="let okr of companyOkrs">
+        <div class="okr-detail-header">
+            <div>
+                <h3>{{ okr.name }}</h3>
+                <p>{{ okr.description }}</p>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-icon"><i data-feather="eye"></i></button>
+                <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+            </div>
+        </div>
+        <div class="okr-overall-progress">
+            <span>Tiến độ tổng thể</span>
+            <strong>{{ okr.progress }}%</strong>
+        </div>
+        <div class="progress-bar main"><div class="progress" [style.width.%]="okr.progress"></div></div>
+        <div class="kr-list">
+            <div class="kr-item" *ngFor="let kr of okr.keyResults">
+                <div class="kr-info">
+                    <p>{{ kr.name }}</p>
+                    <small>{{ kr.current }} / {{ kr.target }}</small>
+                </div>
+                <div class="kr-progress">
+                    <span class="tag-status on-track">Đúng tiến độ</span>
+                    <div class="progress-bar"><div class="progress" [style.width.%]="kr.progress"></div></div>
+                    <span>{{ kr.progress }}%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'department'">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title"><i data-feather="users"></i> OKRs Phòng ban</h2>
+        <p class="section-description">Quản lý các mục tiêu cấp phòng ban (0 OKR)</p>
+      </div>
+      <button class="btn btn-primary"><i data-feather="plus"></i> Tạo OKR Phòng ban</button>
+    </div>
+    <div class="card empty-state-card">
+        <div class="placeholder-icon"><i data-feather="target"></i></div>
+        <h3>Chưa có OKR phòng ban nào</h3>
+        <p>Tạo OKR đầu tiên cho phòng ban của bạn để liên kết với mục tiêu công ty</p>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo OKR đầu tiên</button>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'personal'">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title"><i data-feather="user"></i> OKRs của tôi</h2>
+          <p class="section-description">Quản lý các mục tiêu cá nhân của bạn (1 OKR)</p>
+        </div>
+        <button class="btn btn-primary"><i data-feather="plus"></i> Tạo OKR cá nhân</button>
+      </div>
+      <div class="card rewards-card">
+          <div class="reward-item">
+              <i data-feather="gift"></i><span>1250</span><small>OKR Coins</small>
+          </div>
+          <div class="reward-item">
+              <i data-feather="heart"></i><span>85</span><small>Trust</small>
+          </div>
+          <div class="reward-item">
+              <i data-feather="award"></i><span>120</span><small>Dedication</small>
+          </div>
+          <span class="tag-reward">3 thành tích</span>
+      </div>
+      <div class="personal-stats-grid">
+          <div class="card stat-simple"><span>OKRs của tôi</span><strong>1</strong></div>
+          <div class="card stat-simple"><span>Hoàn thành</span><strong>0</strong></div>
+          <div class="card stat-simple"><span>Đúng tiến độ</span><strong>0</strong></div>
+          <div class="card stat-simple"><span>Tiến độ TB</span><strong>0%</strong></div>
+      </div>
+      <div class="card personal-okr-card" *ngFor="let okr of personalOkrs">
+          <div class="personal-okr-header">
+              <div class="tags">
+                  <span class="tag-icon"><i data-feather="user"></i> Cá nhân</span>
+                  <span class="tag-icon"><i data-feather="calendar"></i> Q4 2024</span>
+                  <span class="tag-icon">Nguyễn Thắng</span>
+                  <span class="tag-link">Liên kết OKR phòng ban</span>
+              </div>
+              <div class="action-buttons">
+                  <button class="btn btn-secondary">Check-in</button>
+                  <button class="btn-icon"><i data-feather="eye"></i></button>
+                  <button class="btn-icon"><i data-feather="edit-2"></i></button>
+                  <button class="btn-icon danger"><i data-feather="trash-2"></i></button>
+              </div>
+          </div>
+          <h3 class="personal-okr-title">{{ okr.name }}</h3>
+          <div class="personal-okr-progress">
+              <div class="progress-bar main"><div class="progress red" [style.width.%]="okr.progress"></div></div>
+              <span>{{ okr.progress }}% hoàn thành</span>
+              <span>1 Key Results</span>
+          </div>
+          <div class="personal-okr-meta">
+              <span>Bắt đầu: {{ okr.startDate }}</span>
+              <span>Kết thúc: {{ okr.endDate }}</span>
+              <span class="remaining-days">Còn {{ okr.remainingDays }} ngày</span>
+          </div>
+      </div>
+  </div>
+
+  <div *ngIf="activeTab === 'analysis'">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title"><i data-feather="pie-chart"></i> Phân tích & Báo cáo</h2>
+        <p class="section-description">Phân tích hiệu suất và tạo báo cáo OKR</p>
+      </div>
+      <div class="page-actions">
+        <select class="filter-select"><option>Quý này</option></select>
+        <button class="btn btn-secondary"><i data-feather="download"></i> Xuất báo cáo</button>
+      </div>
+    </div>
+    <div class="analysis-grid">
+      <div class="card stat-simple"><span>Tổng OKR</span><strong>2</strong><small>Tất cả cấp độ</small></div>
+      <div class="card stat-simple"><span>Hoàn thành</span><strong>0</strong><small>0%</small></div>
+      <div class="card stat-simple"><span>Tiến độ trung bình</span><strong>38%</strong><div class="progress-bar"><div class="progress" style="width: 38%;"></div></div></div>
+      <div class="card stat-simple"><span>Cần chú ý</span><strong>1</strong><small>Rủi ro & trễ hạn</small></div>
+    </div>
+    <div class="card">
+      <h3 class="card-title"><i data-feather="bar-chart"></i> Phân bổ trạng thái OKR</h3>
+      <div class="status-distribution">
+        <div class="dist-item"><span>0</span><div class="progress-bar flat"><div class="progress blue" style="width: 0%;"></div></div><label>Hoàn thành</label></div>
+        <div class="dist-item"><span>1</span><div class="progress-bar flat"><div class="progress green" style="width: 50%;"></div></div><label>Đúng hướng</label></div>
+        <div class="dist-item"><span>0</span><div class="progress-bar flat"><div class="progress orange" style="width: 0%;"></div></div><label>Có rủi ro</label></div>
+        <div class="dist-item"><span>1</span><div class="progress-bar flat"><div class="progress red" style="width: 50%;"></div></div><label>Trễ hạn</label></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="card-title"><i data-feather="trending-up"></i> Hiệu suất theo phòng ban</h3>
+      <div class="department-performance-grid">
+        <div class="card stat-simple"><span>OKR Công ty</span><strong>1</strong><small>TB: 75%</small></div>
+        <div class="card stat-simple"><span>OKR Phòng ban</span><strong>0</strong><small>TB: 0%</small></div>
+        <div class="card stat-simple"><span>OKR Cá nhân</span><strong>1</strong><small>TB: 0%</small></div>
+      </div>
+    </div>
+     <div class="card">
+      <h3 class="card-title"><i data-feather="file-text"></i> Tạo báo cáo</h3>
+      <p class="card-subtitle">Xuất báo cáo chi tiết theo từng loại phân tích</p>
+      <div class="report-actions-grid">
+        <button class="btn btn-secondary report-action"><i data-feather="bar-chart-2"></i> Báo cáo tổng quan</button>
+        <button class="btn btn-secondary report-action"><i data-feather="users"></i> Báo cáo phòng ban</button>
+        <button class="btn btn-secondary report-action"><i data-feather="user"></i> Báo cáo cá nhân</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'ranking'">
+    <div class="section-header">
+        <h2 class="section-title"><i data-feather="award"></i> Bảng xếp hạng & Thành tích</h2>
+        <p class="section-description">Xếp hạng hiệu suất và hệ thống thưởng gamification</p>
+    </div>
+    <div class="card rewards-card">
+        <div class="reward-item">
+            <i data-feather="gift"></i><span>1250</span><small>OKR Coins</small>
+        </div>
+        <div class="reward-item">
+            <i data-feather="heart"></i><span>85</span><small>Trust</small>
+        </div>
+        <div class="reward-item">
+            <i data-feather="award"></i><span>120</span><small>Dedication</small>
+        </div>
+        <span class="tag-reward">3 thành tích</span>
+    </div>
+    <div class="sub-tabs-alt">
+        <button class="sub-tab-item active"><i data-feather="user"></i> Cá nhân</button>
+        <button class="sub-tab-item"><i data-feather="users"></i> Phòng ban</button>
+    </div>
+    <div class="leaderboard-list">
+      <h3 class="section-title"><i data-feather="star"></i> Top cá nhân</h3>
+      <div class="leaderboard-item" *ngFor="let user of leaderboard">
+        <div class="rank">{{ user.rank }}</div>
+        <div class="user-info">
+          <h4>{{ user.name }}</h4>
+          <p>{{ user.title }}</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><span>{{ user.progress }}%</span><small>Hoàn thành</small></div>
+          <div class="stat"><span>{{ user.coins }}</span><small>OKR Coins</small></div>
+          <div class="stat"><span><i data-feather="star"></i> {{ user.achievements }}</span><small>Thành tích</small></div>
+        </div>
+        <div class="trend" [class.up]="user.trend === 'up'" [class.down]="user.trend === 'down'">
+          <i [attr.data-feather]="user.trend === 'up' ? 'trending-up' : 'trending-down'"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeTab === 'settings'">
+    <div class="section-header">
+      <h2 class="section-title"><i data-feather="settings"></i> Cài đặt hệ thống OKR</h2>
+      <p class="section-description">Quản lý cấu hình và tùy chỉnh hệ thống OKR</p>
+    </div>
+    <div class="card">
+      <div class="sub-tabs-alt">
+        <button class="sub-tab-item active"><i data-feather="gift"></i> Hệ thống thưởng</button>
+        <button class="sub-tab-item"><i data-feather="git-merge"></i> Liên kết OKR</button>
+        <button class="sub-tab-item"><i data-feather="award"></i> Thành tựu</button>
+        <button class="sub-tab-item"><i data-feather="bell"></i> Thông báo</button>
+      </div>
+      <div class="settings-content">
+        <h3 class="card-title">Cài đặt hệ thống thưởng</h3>
+        <p class="card-subtitle">Cấu hình OKR Coins, Trust Points và Dedication Points</p>
+        <div class="setting-item">
+          <label>Kích hoạt gamification</label>
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+        </div>
+        <div class="settings-grid">
+            <div class="input-group"><label>OKR Coins cho hoàn thành OKR</label><input type="text" value="100"></div>
+            <div class="input-group"><label>OKR Coins cho hoàn thành Key Result</label><input type="text" value="25"></div>
+            <div class="input-group"><label>OKR Coins cho check-in hàng tuần</label><input type="text" value="5"></div>
+            <div class="input-group"><label>Bonus hợp tác</label><input type="text" value="10"></div>
+            <div class="input-group"><label>Trust Points cơ bản</label><input type="text" value="10"></div>
+            <div class="input-group"><label>Dedication Points cơ bản</label><input type="text" value="5"></div>
+        </div>
+        <button class="btn btn-primary"><i data-feather="save"></i> Lưu cài đặt thưởng</button>
+      </div>
+    </div>
+  </div>
+</div>

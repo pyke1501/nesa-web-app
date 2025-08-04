@@ -1,0 +1,43 @@
+<nav class="sidebar">
+
+  <div class="user-profile-container">
+
+    <div class="sidebar-user" (click)="toggleUserMenu()">
+      <div class="user-avatar">{{ userInitials }}</div>
+      <div class="user-info">
+        <span class="user-name">{{ userProfile?.fullName }}</span>
+        <span class="user-title">{{ userProfile?.title }}</span>
+      </div>
+    </div>
+
+    <div class="user-dropdown-menu" *ngIf="isUserMenuOpen">
+      <ul>
+        <li>
+          <a routerLink="/account-settings">
+            <i data-feather="settings"></i>
+            <span>Cài đặt tài khoản</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" (click)="logout()">
+            <i data-feather="log-out"></i>
+            <span>Đăng xuất</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-menu">
+    <li *ngFor="let item of menuItems" routerLinkActive="active">
+      <a [routerLink]="item.path">
+          <i [attr.data-feather]="item.icon"></i>
+          <span>{{ item.name }}</span>
+      </a>
+  </li>
+  </ul>
+  <div class="sidebar-footer">
+    <p>© 2025 NESA Platform</p>
+  </div>
+</nav>

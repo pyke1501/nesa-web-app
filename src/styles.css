@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-blue: #0A3D91;
+  --dark-blue: #08337A;
+  --bg-blue: #1C4E80;
+  --light-blue: #4A90E2;
+  --bg-main: #F4F7FC;
+  --bg-card: #FFFFFF;
+  --text-light: #FFFFFF;
+  --text-dark: #333333;
+  --text-secondary: #6c757d;
+  --green-light: #E9F7F0;
+  --green-dark: #27AE60;
+  --purple-light: #F4F1FA;
+  --purple-dark: #8E44AD;
+  --border-color: #EAEEF3;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+}
+
+.card {
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* src/styles.css */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  display: flex;
+  min-height: 100%;
+}
